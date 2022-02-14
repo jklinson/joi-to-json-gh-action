@@ -17,28 +17,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
         run: npm ci
+
       - run: npm run build --if-present
+
       - run: npm test
+      
       - name: Convert Schema to JSON
         run: npm run convert --if-present
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
-      - name: Check output
-        run: echo ${{ steps.vars.outputs.short_ref }}
-
-      - name: push
-        uses: github-actions-x/commit@v2.8
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v8
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          push-branch: ${{ steps.vars.outputs.short_ref }}
-          files: resources/user.json
-          commit-message: 'Updating schema json files.'
-          rebase: 'true' # pull and rebase before commit'
+          author_name: Linson Alfred
+          author_email: jklinson@gmail.com
+          message: 'Updating schema json files.'
+          add: 'resources/user.json'
