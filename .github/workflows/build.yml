@@ -27,10 +27,16 @@ jobs:
       - run: npm test
       - name: Convert Schema to JSON
         run: npm run convert --if-present
+      - name: Print branch name
+        run: echo ${GITHUB_REF#refs/heads/}
       - name: push
         uses: github-actions-x/commit@v2.8
         with:
           github-token: ${{ secrets.GH_TOKEN }}
-          push-branch: master
+          push-branch: ${GITHUB_REF##*/}
+          files: resources/user.json
           commit-message: 'Updating schema json files.'
-          rebase: 'true' # pull and rebase before commit
+          rebase: 'true' # pull and rebase before commit'
+          force-add: 'true'
+          name: 'Github Action Bot'
+          email: jklinson@gmail.com 
