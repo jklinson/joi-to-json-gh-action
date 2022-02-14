@@ -27,8 +27,13 @@ jobs:
       - run: npm test
       - name: Convert Schema to JSON
         run: npm run convert --if-present
-      - name: Print branch name
-        run: echo ${GITHUB_REF#refs/heads/}
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      - name: Check output
+        run: echo ${{ steps.vars.outputs.short_ref }}
+
       - name: push
         uses: github-actions-x/commit@v2.8
         with:
