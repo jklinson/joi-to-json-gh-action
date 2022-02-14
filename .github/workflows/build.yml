@@ -38,7 +38,7 @@ jobs:
         uses: github-actions-x/commit@v2.8
         with:
           github-token: ${{ secrets.GH_TOKEN }}
-          push-branch: ${GITHUB_REF##*/}
+          push-branch: ${{ steps.vars.outputs.short_ref }}
           files: resources/user.json
           commit-message: 'Updating schema json files.'
           rebase: 'true' # pull and rebase before commit'
