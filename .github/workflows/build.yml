@@ -37,6 +37,3 @@ jobs:
           files: resources/user.json
           commit-message: 'Updating schema json files.'
           rebase: 'true' # pull and rebase before commit'
-          force-add: 'true'
-          name: 'Github Action Bot'
-          email: jklinson@gmail.com 
