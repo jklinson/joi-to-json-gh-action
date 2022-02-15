@@ -1,0 +1,17 @@
+{
+  "name": "joi-to-json-gh-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "convert": "node ./src/utils/schema-to-json.js",
+    "test": "jest -i ./test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.5.1",
+    "joi": "^17.6.0",
+    "joi-to-json": "^2.2.0"
+  }
+}
